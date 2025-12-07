@@ -4,38 +4,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Create the addTask Function
+    // Define the addTask Function
     function addTask() {
-        // 1. Retrieve and trim the value from the task input field
+        // 1. Retrieve and trim the value (Required by previous constraints)
         const taskText = taskInput.value.trim();
 
-        // 2. Check if taskText is empty. If so, use alert.
+        // 2. Check if taskText is empty and alert (Required by previous constraints)
         if (taskText === "") {
             alert("Please enter a task");
-            return; // Exit the function so we don't add an empty task
+            return; 
         }
 
-        // If taskText is not empty, proceed with creation:
+        // Task Creation and Removal Logic: If taskText is not empty
+        // -----------------------------------------------------------
         
-        // Create new li element
+        // Create a new li element
         const li = document.createElement('li');
+        
+        // Set its textContent to taskText
         li.textContent = taskText;
 
-        // Create the remove button
+        // Create a new button element for removing the task
         const removeBtn = document.createElement('button');
+        
+        // Set its textContent to “Remove”
         removeBtn.textContent = "Remove";
+        
+        // Give it a class name of ‘remove-btn’ (Fixes the classList.add error)
         removeBtn.className = "remove-btn";
 
-        // Assign onclick event to the remove button
+        // Assign an onclick event to the remove button
         removeBtn.onclick = function () {
+            // Removes the li element from taskList
             taskList.removeChild(li);
         };
 
-        // Append button to li, and li to taskList
+        // Append the remove button to the li element
         li.appendChild(removeBtn);
+        
+        // Append the li to taskList
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear the task input field
         taskInput.value = "";
     }
 
